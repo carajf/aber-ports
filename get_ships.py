@@ -1,27 +1,28 @@
+### PYTHON SCRIPT TO CONVERT CSV (Excel) FILES INTO JSON 
+
 import sys
 from openpyxl import load_workbook
+import json
 
 # ship_excel_schema contains facts about about how the ship data is organized in Excel
 import ship_excel_schema
-import json
 
-# represent each sheet in an Excel workbook as a separate JSON object
-# returns a list of JSON ship objects
-
-def get_ships( excel_ship_file ):
+# Function get_shipreturns a list of JSON ship objects
+def get_ships(excel_ship_file):
 
     # ships is the list of JSON ship objects that will be returned
     ships = []
 
     # load the Excel workbook
     try:
-        wb = load_workbook( filename = excel_ship_file )
+        wb = load_workbook(filename = excel_ship_file)
 
-        # assume the vessel data is on sheet 1 of the workbook
+        # getting the name, number, and port registry of each ship
         vessel_name = wb.active[ship_excel_schema.vessel_name].value
         official_number = wb.active[ship_excel_schema.official_number].value
         port_of_registry = wb.active[ship_excel_schema.port_of_registry].value
-
+        
+        # for each sheet in the workbook, assign the value to a key in a ship dictionary
         for sheet in wb:
             # get ship attributes from the first worksheet in the workbook
             ship = {}
@@ -48,16 +49,17 @@ def get_ships( excel_ship_file ):
 
     except:
         # deal with the error if the file cannot be opened
-        print( excel_ship_file )
+        print(excel_ship_file)
 
+    # Output of the function returns the ships list of dictionaries
     return ships
    
 if __name__ == "__main__":
     # get the name of the Excel File
-    print( "Input the name of the Excel Ship File")
+    print("Input the name of the Excel Ship File")
     excel_ship_file = sys.stdin.readline().strip()
     
-    ships = get_ships( excel_ship_file )
+    ships = get_ships(excel_ship_file)
     for ship in ships:
         print(json.dumps(ship))
             
