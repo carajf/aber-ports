@@ -1,4 +1,4 @@
-# how the data is organized in the ship Excel sheets
+### SPECIFYING THE LOCATION OF THE DATA IN THE EXCEL WORKSHEETS
 
 vessel_name = "F2"
 official_number = "F4"
@@ -7,10 +7,10 @@ port_of_registry = "F6"
 key_and_examples_def = "L2"
 key_and_examples_val = "N2"
 
-# the first row where mariner data items are held
+# The first row where the mariner data items are held (all previous rows are headers)
 mariners_start_row = 10
 
-# columns where the mariner data items are held
+# Columns where the mariner data items are held
 mariner_attributes = {
     'name': 1,
     'year_of_birth': 2,
